@@ -1,0 +1,62 @@
+ Query 1°
+
+
+select u.username as Nome_Utente , u.email ,
+u.created_at as Creato_in_Data , u.updated_at as Aggiornato_in_Data,
+m.`type` as Tipologia_Post
+from users u 
+join medias m 
+on u.id = m.user_id 
+where m.`type` = 'video';
+
+
+ Query 2°
+
+select p.id as ID_Post , p.title as Titolo_Post ,
+p.`date` as Data_Pubblicazione,
+l.post_id as Like_post
+from posts p 
+left join likes l 
+on p.id = l.post_id 
+where l.post_id  is null;
+
+
+
+
+
+ Query 3°
+
+select p.id as ID_Post , count(l.post_id) as Like_Post
+from posts p 
+left join likes l 
+on p.id = l.post_id 
+group by p.id ;
+
+
+
+
+ Query 4°
+
+select  u.username as Nome_Utente ,
+count(m.user_id) as Media_Caricati
+from users u 
+inner join medias m 
+on u.id = m.user_id 
+group by m.user_id
+order by Media_Caricati ASC; 
+
+
+
+
+
+ Query 5°
+
+select  u.username as Nome_Utente ,
+count(l.user_id) as like_Utente
+from users u 
+inner join likes l 
+on u.id = l.user_id 
+group by l.user_id
+order by like_utente asc 
+
+
